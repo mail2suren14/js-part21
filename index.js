@@ -1,0 +1,113 @@
+var acctData = [
+{
+"acctNum": "AAA - 1234",
+"user": "Alice"
+},
+{
+"acctNum": "AAA - 5231",
+"user": "Bob"
+},
+{
+"acctNum": "AAA - 9921",
+"user": "Alice"
+},
+{
+"acctNum": "AAA - 8191",
+"user": "Alice"
+}
+];
+
+//console.log(acctData);
+balance = {
+"AAA - 1234": 4593.22,
+"AAA - 9921": 0,
+"AAA - 5231": 232142.5,
+"AAA - 8191": 1
+};
+
+
+keysArr = Object.keys(balance);
+balValArr=Object.values(balance);
+totalArr=new Array(3)
+totalArr1=new Array(3)
+
+
+function sortNumber(a, b) {
+  return a - b;
+}
+
+
+balValArr.sort(sortNumber);
+
+acctData.forEach(function(arrData) {
+  
+	keysArr.forEach(function(element) {
+	
+		if(arrData.acctNum == element){
+			
+			var jsonObj={"acctNum": arrData.acctNum,
+					"user": arrData.user,
+				
+					"balance":balance[element]
+				
+			
+					};
+			totalArr.splice( balValArr.indexOf(balance[element]), 1, jsonObj);
+			totalArr1.splice( balValArr.indexOf(balance[element]), 1, jsonObj);
+
+		
+		
+}
+
+})
+
+});  
+
+
+var ObArr = totalArr;
+
+/*Filtered By BOb Start*/
+var FilterOne = ObArr.filter(function (el) {
+    return (el.user === "Bob");
+});
+console.log("**** Filtered By BOB***");
+console.log(FilterOne);
+/*Filtered By BOb End*/
+
+
+/*Filtered By Charlie Start*/
+var FilterTwo = ObArr.filter(function (el) {
+	return (el.user === "Charlie");
+});
+console.log("**** Filtered By Charlie***");
+console.log(FilterTwo);
+/*Filtered By Charlie End*/
+
+
+/*Sort By AcctNum in an Ascending Order Start*/
+function compare_to_sort(x,y) 
+ {
+  if (x.acctNum < y.acctNum)
+    return -1;
+  if (x.acctNum > y.acctNum)
+    return 1;
+  return 0;
+ }
+console.log("*** Sorted By AcctNum in an Ascending Order ***");
+console.log(totalArr1.sort(compare_to_sort));
+/*Sort By AcctNum in an Ascending Order End*/
+
+
+/*Filtered By Alice Start*/
+var FilterThree = ObArr.filter(function (el){
+	return (el.user === "Alice");
+});
+console.log("*** Filtered By Alice ***");
+console.log(FilterThree);
+/*Filtered By Alice End*/
+
+
+/*Sort By Balance in an Ascending Order Start*/
+console.log("*** Sorted By Balance in an Ascending Order");
+console.log(totalArr);
+/*Sort By Balance in an Ascending Order End*/
